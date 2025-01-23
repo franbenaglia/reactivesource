@@ -42,6 +42,7 @@ public class Generator {
                     String json = "";
                     try {
                         json = mapper.writeValueAsString(climate);
+                        logger.info("input: " + json);
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }

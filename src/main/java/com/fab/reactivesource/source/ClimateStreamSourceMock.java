@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 @Component
 public class ClimateStreamSourceMock {
 
-    private static final long TIME_GAP = 400L;
+    private static final long TIME_GAP = 500L;
 
     private static final float MAX_TEMP_AVERAGE = 30.0f;
     private static final float MIN_TEMP_AVERAGE = -5.0f;
