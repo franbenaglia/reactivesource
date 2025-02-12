@@ -1,2 +1,2 @@
 spring.application.name=reactivesource
-server.port=8081
+server.port=${random.int(8081,8090)}

@@ -4,10 +4,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
 import com.fab.reactivesource.websocketclient.Generator;
 //import com.fab.reactivesource.websocketclient.StompGenerator;
 
+@EnableDiscoveryClient
 @SpringBootApplication
+//@EnableFeignClients
 public class ReactivesourceApplication {
 
 	public static void main(String[] args) {

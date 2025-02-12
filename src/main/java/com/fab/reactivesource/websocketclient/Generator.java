@@ -35,8 +35,8 @@ public class Generator {
         EmitterProcessor<String> output = EmitterProcessor.create();
 
         // Many<String> z = Sinks.many().multicast().onBackpressureBuffer();
-
-        Mono<Void> sessionMono = client.execute(URI.create("ws://localhost:8080/climateData"),
+        //EN CASO DE COMPILAR PARA DOCKER WS DEBE SER EL IP NO EL LOCALHOST
+        Mono<Void> sessionMono = client.execute(URI.create("ws://192.168.43.77:8080/climateData"), 
                 session -> session.send(cs.map(climate -> {
                     ObjectMapper mapper = new ObjectMapper();
                     String json = "";

@@ -1,6 +1,7 @@
 package com.fab.reactivesource.source;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
@@ -41,7 +42,7 @@ public class ClimateStreamSourceMock {
         double temperature = (Math.random() * MAX_TEMP_VARIATION) * aleatorySign() + MAX_TEMP_AVERAGE;
         double humidity = 50.0;
 
-        return new Climate(temperature, humidity, channel, 0);
+        return new Climate(temperature, humidity, channel, 0, new Date());
     }
 
     private Climate minBoundaryClimate(long channel) {
@@ -49,7 +50,7 @@ public class ClimateStreamSourceMock {
         double temperature = (Math.random() * MIN_TEMP_VARIATION * aleatorySign()) + MIN_TEMP_AVERAGE;
         double humidity = 40.0;
 
-        return new Climate(temperature, humidity, channel, 0);
+        return new Climate(temperature, humidity, channel, 0, new Date());
     }
 
     // https://www.npmjs.com/package/node-port-scanner
@@ -78,16 +79,16 @@ public class ClimateStreamSourceMock {
             // float v = aleatorySign();
             // v == 1 ? channel : 400
             if (c.temperature() < maxBoundaryClimate.temperature() && wrapper.rising) {
-                return new Climate(c.temperature() + rate, c.humidity(), channel, wrapper.idx++);
+                return new Climate(c.temperature() + rate, c.humidity(), channel, wrapper.idx++, new Date());
             } else {
                 wrapper.rising = false;
             }
             if (c.temperature() > minBoundaryClimate.temperature() && !wrapper.rising) {
-                return new Climate(c.temperature() - rate, c.humidity(), channel, wrapper.idx++);
+                return new Climate(c.temperature() - rate, c.humidity(), channel, wrapper.idx++, new Date());
             } else {
                 wrapper.rising = true;
                 wrapper.idx = 0;
-                return new Climate(c.temperature() - rate, c.humidity(), channel, wrapper.idx++);
+                return new Climate(c.temperature() - rate, c.humidity(), channel, wrapper.idx++, new Date());
             }
 
         };
