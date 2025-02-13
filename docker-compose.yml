@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  servicio-eureka-server:
+    image: fab/eureka
+    container_name: servicio-eureka-server
+    ports:
+      - 8761:8761
+  config-server:
+    image: fab/configuration
+    container_name: config-server
+    ports:
+      - 8888:8888
+    depends_on:
+      - servicio-eureka-server
+  reactivehub:
+    image: fab/reactivehub
+    container_name: reactivehub
+    ports:
+      - 8080:8080
+    depends_on:
+      - config-server
+  reactivesource:
+    image: fab/reactivesource
+    #container_name: reactivesource
+    deploy:
+      mode: replicated
+      replicas: 2
+    ports:
+      - 8081
+    depends_on:
+      - reactivehub
+  apigateway:
+    image: fab/apigateway
+    container_name: apigateway
+    ports:
+      - 8085:8085
+    depends_on:
+      - config-server
